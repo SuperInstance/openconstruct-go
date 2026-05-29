@@ -1,14 +1,15 @@
-# openconstruct-go
+# openconstruct-go — Go Bindings for OpenConstruct
 
-Go bindings for OpenConstruct backend services, Kubernetes operators, and cloud-native agent deployments.
+Go client for the [OpenConstruct](https://github.com/SuperInstance/OpenConstruct) ecosystem. Built for backend services, Kubernetes operators, and cloud-native agent deployments.
 
-## Install
+## What This Gives You
 
-```bash
-go get github.com/superinstance/openconstruct-go
-```
+- **5-phase onboarding** — Start → DeclareAgent → SelectModules → ChooseInterface → GenerateConfig
+- **Module registry** — built-in catalog with domain filtering
+- **Idiomatic Go** — `Close()` for cleanup, struct-based types, error returns
+- **Zero external dependencies** — just the standard library
 
-## Usage
+## Quick Start
 
 ```go
 package main
@@ -32,14 +33,28 @@ func main() {
     client.DeclareAgent(identity)
 
     modules := client.ListModules(openconstruct.WithDomain("math"))
-    fmt.Println("Available math modules:", len(modules))
-
     client.SelectModules([]string{"spectral-graph-core", "plato-room"})
     client.ChooseInterface("sdk")
 
     config := client.GenerateConfig()
     fmt.Printf("Config: %+v\n", config)
 }
+```
+
+## Installation
+
+```bash
+go get github.com/superinstance/openconstruct-go
+```
+
+## How It Fits
+
+One of the [polyglot OpenConstruct bindings](https://github.com/SuperInstance/OpenConstruct). See [openconstruct-examples](https://github.com/SuperInstance/openconstruct-examples) for a Go onboarding example.
+
+## Testing
+
+```bash
+go test ./...
 ```
 
 ## License
